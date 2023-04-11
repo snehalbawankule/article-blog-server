@@ -14,8 +14,8 @@ const createUser = async (
   password: string
 ): Promise<any> => {
   const user = await UserModel.create({
-    email,
     name,
+    email,
     profile,
     password,
   });

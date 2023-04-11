@@ -15,6 +15,7 @@ const getAll = async (req: any, res: any, next: any) => {
     .then((result) => {
       //console.log(req.query);
       res.json(result);
+      next;
     })
 
     .catch((err) => {
