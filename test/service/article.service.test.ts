@@ -5,7 +5,6 @@ import {
 } from "../../src/service/articles.service";
 import { ArticleModel } from "../../src/models/articles.model";
 
-//jest.mock("../../src/models/user.model");
 const mockArticles = [
   {
     id: "4",
