@@ -13,28 +13,29 @@ const getAll = async (req: any, res: any) => {
 
 const addUser = async (req: any, res: any) => {
   try {
-    const { email, name, profile, password } = req.body;
-    const user = await createUser(email, name, profile, password);
+    const { name, email, profile, password } = req.body;
+    const user = await createUser(name, email, profile, password);
     return res.json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 };
-
 const checkUser = async (req: any, res: any) => {
   try {
     const { email, password } = req.body;
-
+    console.log(password);
     const user = await userCheck(email);
     if (!user) {
       return res.send({ message: "User not found" });
     }
-    const isMatch = await bcrypt.compare(password, user?.dataValues.password);
-    if (!isMatch) {
-      return res.send({ message: "Invalid password" });
+    console.log(user);
+    const isMatch = await bcrypt.compare(password, user.dataValues.password);
+    console.log(password, user.dataValues.password);
+    if (isMatch) {
+      return res.status(200).send(user);
     }
-    return res.status(200).send(user);
+    return res.send({ message: "Invalid password" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
